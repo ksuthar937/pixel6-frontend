@@ -1,3 +1,13 @@
+:root {
+  /* Global variables to be defined here */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-primary1: #9785ba;
+  --color-primary2: #af9fcd;
+  --color-secondary1: #d7c7f4;
+  --color-secondary2: #faf7ff;
+  --color-logo: #9785ba;
+}
 *,
 *::before,
 *::after {
@@ -9,8 +19,9 @@
 html,
 body {
   height: 100%;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  background-color: var(--color-secondary1);
+  color: var(--color-black);
+  font-family: "Ubuntu", sans-serif;
 }
 body {
   line-height: 1.5;
