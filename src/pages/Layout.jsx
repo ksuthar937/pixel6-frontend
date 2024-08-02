@@ -2,10 +2,12 @@ import { Box } from "@mui/material";
 import { Outlet } from "react-router";
 import Navbar from "../components/Navbar";
 import Tabs from "../components/Tabs";
+import { Toaster } from "react-hot-toast";
 
 const Layout = () => {
   return (
     <Box sx={{ display: "flex", height: "100vh" }}>
+      <Toaster />
       <Box
         sx={{
           display: { xs: "none", sm: "block" },

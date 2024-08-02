@@ -53,12 +53,17 @@ const clientSlice = createSlice({
   initialState,
   reducers: {
     addClient(state, action) {
-      let id = state.clients.length + 1;
+      const lastId = state.clients[state.clients.length - 1].id;
+      const id = lastId + 1;
       state.clients.push({ id, ...action.payload });
+    },
+    removeClient(state, action) {
+      const id = action.payload;
+      state.clients = state.clients.filter((client) => client.id !== id);
     },
   },
 });
 
-export const { addClient } = clientSlice.actions;
+export const { addClient, removeClient } = clientSlice.actions;
 
 export default clientSlice.reducer;
