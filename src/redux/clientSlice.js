@@ -10,7 +10,8 @@ const clientSlice = createSlice({
   reducers: {
     addClient(state, action) {
       const lastId = state.clients[state.clients.length - 1]?.id;
-      const id = lastId + 1;
+      let id = lastId === null ? 1 : lastId + 1;
+
       state.clients.push({ id, ...action.payload });
     },
     removeClient(state, action) {
