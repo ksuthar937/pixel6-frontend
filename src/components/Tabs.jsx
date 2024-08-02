@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useLocation, useNavigate } from "react-router";
+
 const Tabs = () => {
   const navigate = useNavigate();
 
@@ -19,7 +20,6 @@ const Tabs = () => {
         }}
       >
         <Toolbar>
-          {/* <img src={Logo} alt="ai chat bot logo" width={40} /> */}
           <RecommendIcon fontSize="large" color="inherit" />
           <Typography
             variant="h6"

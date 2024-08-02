@@ -56,6 +56,7 @@ const EditForm = () => {
       mobile,
     });
     setClientAddress(addresses);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [clientAddress, setClientAddress] = useState(intialAddress);
