@@ -65,6 +65,7 @@ const Navbar = (props) => {
               ":hover": {
                 cursor: "pointer",
               },
+              fontFamily: "revert",
             }}
             onClick={() => navigate("/")}
           >

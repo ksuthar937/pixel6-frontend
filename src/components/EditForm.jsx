@@ -7,21 +7,21 @@ import {
   Typography,
 } from "@mui/material";
 
-import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router";
-import { addClient } from "../redux/clientSlice";
 import { AccountCircle } from "@mui/icons-material";
 import CallIcon from "@mui/icons-material/Call";
 import CreditCardIcon from "@mui/icons-material/CreditCard";
 import EmailIcon from "@mui/icons-material/Email";
 import HomeIcon from "@mui/icons-material/Home";
-import axios from "axios";
-import toast, { LoaderIcon } from "react-hot-toast";
-import { validateAddress, validateClientInfo } from "../utils/validation";
 import ListIcon from "@mui/icons-material/List";
-import PlaceIcon from "@mui/icons-material/Place";
 import LocationCityIcon from "@mui/icons-material/LocationCity";
+import PlaceIcon from "@mui/icons-material/Place";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import toast, { LoaderIcon } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router";
+import { editClient } from "../redux/clientSlice";
+import { validateAddress, validateClientInfo } from "../utils/validation";
 
 const intialAddress = {
   addressLine1: "",
@@ -38,9 +38,25 @@ const intialClientData = {
   mobile: "",
 };
 
-const FormInput = () => {
+const EditForm = () => {
+  const clients = useSelector((state) => state.clients);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { id } = useParams();
+
+  const { fullName, email, pan, mobile, addresses } = clients.find(
+    (client) => Number(client.id) === Number(id)
+  );
+
+  useEffect(() => {
+    setClient({
+      fullName,
+      email,
+      pan,
+      mobile,
+    });
+    setClientAddress(addresses);
+  }, []);
 
   const [clientAddress, setClientAddress] = useState(intialAddress);
   const [client, setClient] = useState(intialClientData);
@@ -66,11 +82,11 @@ const FormInput = () => {
     if (!validateAddress(clientAddress)) {
       return;
     }
-    dispatch(addClient({ ...client, addresses: clientAddress }));
+    dispatch(editClient({ id, ...client, addresses: clientAddress }));
     setClientAddress(intialAddress);
     setClient(intialClientData);
     navigate("/client-list");
-    toast.success("Customer added successfully");
+    toast.success("Customer updated successfully");
   };
 
   // Fetch PAN DATA through API
@@ -535,7 +551,7 @@ const FormInput = () => {
             }}
           >
             <Button color="secondary" type="submit" variant="contained">
-              Add Client
+              Update
             </Button>
           </Box>
         </Box>
@@ -544,4 +560,4 @@ const FormInput = () => {
   );
 };
 
-export default FormInput;
+export default EditForm;

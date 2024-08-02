@@ -1,12 +1,13 @@
+import RecommendIcon from "@mui/icons-material/Recommend";
 import { Button } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Logo from "../assets/react.svg";
-import { useNavigate } from "react-router";
-
+import { useLocation, useNavigate } from "react-router";
 const Tabs = () => {
   const navigate = useNavigate();
+
+  const { pathname } = useLocation();
 
   return (
     <>
@@ -18,7 +19,8 @@ const Tabs = () => {
         }}
       >
         <Toolbar>
-          <img src={Logo} alt="ai chat bot logo" width={40} />
+          {/* <img src={Logo} alt="ai chat bot logo" width={40} /> */}
+          <RecommendIcon fontSize="large" color="inherit" />
           <Typography
             variant="h6"
             ml={1}
@@ -27,16 +29,20 @@ const Tabs = () => {
               fontWeight: 400,
               color: "var(--color-black)",
               fontSize: "24px",
+              fontFamily: "monospace",
             }}
           >
-            Pixel6
+            Wellcome,
           </Typography>
         </Toolbar>
       </AppBar>
 
       <Button
         sx={{
-          background: "var(--color-secondary1)",
+          background:
+            pathname === "/"
+              ? "var(--color-primary1)"
+              : "var(--color-secondary1)",
           color: "var(--color-black)",
 
           fontSize: "16px",
@@ -50,13 +56,16 @@ const Tabs = () => {
             background: "var(--color-primary1)",
           },
         }}
-        onClick={() => navigate("client-create")}
+        onClick={() => navigate("/")}
       >
         Create Client
       </Button>
       <Button
         sx={{
-          background: "var(--color-secondary1)",
+          background:
+            pathname === "/client-list"
+              ? "var(--color-primary1)"
+              : "var(--color-secondary1)",
           color: "var(--color-black)",
 
           fontSize: "16px",

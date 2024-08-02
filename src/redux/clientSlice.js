@@ -7,7 +7,7 @@ const initialState = {
       pan: "APTPS8674C",
       fullName: "Kailash Hukmaram Suthar",
       email: "ksuthar937@gmail.com",
-      mobile: "+919370672382",
+      mobile: "9370672382",
       addresses: {
         addressLine1: "25, Raviraj Society",
         addressLine2: "Dattanagar Katraj",
@@ -22,7 +22,7 @@ const initialState = {
       pan: "APTP674C",
       fullName: "Hukmaram Suthar",
       email: "ksu937@gmail.com",
-      mobile: "+919370672382",
+      mobile: "9370672382",
       addresses: {
         addressLine1: " Society",
         addressLine2: "Dattanagar Katraj",
@@ -36,7 +36,7 @@ const initialState = {
       pan: "APT8674C",
       fullName: "Kailash Suthar",
       email: "ksutr937@gmail.com",
-      mobile: "+919370672382",
+      mobile: "9370672382",
       addresses: {
         addressLine1: ", Raviraj ",
         addressLine2: " Katraj",
@@ -53,7 +53,7 @@ const clientSlice = createSlice({
   initialState,
   reducers: {
     addClient(state, action) {
-      const lastId = state.clients[state.clients.length - 1].id;
+      const lastId = state.clients[state.clients.length - 1]?.id;
       const id = lastId + 1;
       state.clients.push({ id, ...action.payload });
     },
@@ -61,9 +61,18 @@ const clientSlice = createSlice({
       const id = action.payload;
       state.clients = state.clients.filter((client) => client.id !== id);
     },
+    editClient(state, action) {
+      const { id, ...data } = action.payload;
+      const index = state.clients.findIndex(
+        (client) => Number(client.id) === Number(id)
+      );
+      if (index !== -1) {
+        state.clients[index] = { ...state.clients[index], ...data };
+      }
+    },
   },
 });
 
-export const { addClient, removeClient } = clientSlice.actions;
+export const { addClient, removeClient, editClient } = clientSlice.actions;
 
 export default clientSlice.reducer;

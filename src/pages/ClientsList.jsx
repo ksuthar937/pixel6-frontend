@@ -7,11 +7,12 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useDispatch, useSelector } from "react-redux";
 import { removeClient } from "../redux/clientSlice";
 import { Box, Button, Typography } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const ClientsList = () => {
   const clients = useSelector((state) => state.clients);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   if (clients.length === 0) {
     return (
@@ -20,7 +21,7 @@ const ClientsList = () => {
           Currently, there are no available clients. Please create a new client
           to proceed.
         </Typography>
-        <Link to="/client-create">
+        <Link to="/">
           <Button variant="text" color="secondary">
             Create Client
           </Button>
@@ -46,7 +47,7 @@ const ClientsList = () => {
           disableGutters
           secondaryAction={
             <>
-              <IconButton>
+              <IconButton onClick={() => navigate(`details/${client.id}`)}>
                 <EditIcon />
               </IconButton>
               <IconButton onClick={() => dispatch(removeClient(client.id))}>
